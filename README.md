@@ -1,2 +1,2 @@
 # turtle-crossing
-# A game similar to the classic "Frogger" game in Python using Python's Turtle Graphics.
+A game similar to the classic "Frogger" game using Python's Turtle Graphics.
