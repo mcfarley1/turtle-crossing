@@ -26,6 +26,13 @@ while game_is_on:
     for car in car_manager.car_list:
         if car.xcor() - 28 <= player.xcor() <= car.xcor() + 28 and car.ycor() - 22 <= player.ycor() <= car.ycor() + 22:
             scoreboard.game_over()
+            if scoreboard.level > scoreboard.high_score:
+                scoreboard.name_data = ""
+                initials = screen.textinput("Turtle Crossing", "Enter your initials: ")
+                screen.listen()
+                for num in range(3):
+                    scoreboard.name_data += initials[num].upper()
+                scoreboard.update_record()
             game_is_on = False
 
     # If player crosses finish line.
