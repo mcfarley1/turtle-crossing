@@ -2,7 +2,8 @@ import random
 from turtle import Turtle
 COLORS = ["red", "orange", "yellow", "green", "blue", "purple"]
 STARTING_MOVE_DISTANCE = 5
-MOVE_INCREMENT = 5
+MOVE_INCREMENT = 2
+SPEED_VARIATION = 2
 CAR_DENSITY = 20
 
 
@@ -10,8 +11,10 @@ class CarManager:
 
     def __init__(self):
         self.car_list = []
+        self.speed_list = []
         self.generate_car()
         self.move_distance = STARTING_MOVE_DISTANCE
+        self.generate_speed()
 
     def generate_car(self):
         for num in range(CAR_DENSITY):
@@ -24,12 +27,19 @@ class CarManager:
             tim.goto(random.randint(330, 930), random.randint(-250, 250))
             self.car_list.append(tim)
 
+    def generate_speed(self):
+        for num in range(CAR_DENSITY):
+            self.speed_list.append(random.randint(self.move_distance - SPEED_VARIATION,
+                                                  self.move_distance + SPEED_VARIATION))
+
     def car_move(self):
-        for car in self.car_list:
-            car.forward(self.move_distance)
+        for num in range(len(self.car_list)):
+            self.car_list[num].forward(self.speed_list[num])
 
     def speed_up(self):
         self.move_distance += MOVE_INCREMENT
+        self.speed_list = []
+        self.generate_speed()
 
     def remove_car(self):
         for car in self.car_list:
